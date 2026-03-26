@@ -1,0 +1,49 @@
+[project]
+name = "fintech-etl"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "alembic>=1.18.4",
+    "apache-airflow>=3.1.8",
+    "pandas>=3.0.1",
+    "psycopg2-binary>=2.9.11",
+    "python-dotenv>=1.2.2",
+    "requests>=2.32.5",
+    "sqlalchemy>=2.0.48",
+    "yfinance>=1.2.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.7",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
+
+[tool.ruff]
+# Set the line length limit consistently for both linting and formatting
+line-length = 88
+# Target the minimum Python version supported by the project
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP", "B", "PD"]
+
+# Ignore some specific rules globally
+ignore = [
+    "E501",  # Line length is handled by the formatter, but can be ignored if needed
+    "B008",  # Do not use mutable data structures for argument defaults (often okay in DE scripts)
+]
+
+# Allow unused variables starting with an underscore, common in data transformations
+
+[tool.ruff.format]
+# Enable the built-in formatter (replaces Black)
+quote-style = "double"
+indent-style = "space"
+# Format code examples in docstrings
+docstring-code-format = true
