@@ -9,6 +9,7 @@ from constants.constants import COINS
 
 logger = logging.getLogger(__name__)
 
+
 def extract_market_data(
     coins: dict[str, str] = COINS,
     period_days: int = 90,
@@ -40,17 +41,21 @@ def extract_market_data(
             raw.columns = raw.columns.get_level_values(0)
             raw = raw.reset_index()
 
-            raw = raw.rename(columns={
-                "Date":   "date",
-                "Open":   "open",
-                "High":   "high",
-                "Low":    "low",
-                "Close":  "close",
-                "Volume": "volume",
-            })
+            raw = raw.rename(
+                columns={
+                    "Date": "date",
+                    "Open": "open",
+                    "High": "high",
+                    "Low": "low",
+                    "Close": "close",
+                    "Volume": "volume",
+                }
+            )
             raw["coin_id"] = coin_id
-            raw["ticker"]  = ticker
-            raw = raw[["coin_id", "ticker", "date", "open", "high", "low", "close", "volume"]]
+            raw["ticker"] = ticker
+            raw = raw[
+                ["coin_id", "ticker", "date", "open", "high", "low", "close", "volume"]
+            ]
 
             frames.append(raw)
 

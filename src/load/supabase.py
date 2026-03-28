@@ -21,17 +21,19 @@ def _upsert(df: pd.DataFrame, table: str, conflict_cols: list[str]) -> int:
     :return number of rows affected
     """
     engine = _get_engine()
-    tmp = f'_tmp_{table}'
+    tmp = f"_tmp_{table}"
     with engine.connect() as conn:
-        df.to_sql(tmp, con=conn, if_exists='replace', index=False)
+        df.to_sql(tmp, con=conn, if_exists="replace", index=False)
         conflict = ", ".join(conflict_cols)
         cols = ", ".join(df.columns)
 
-        result = conn.execute(text(f"""
+        result = conn.execute(
+            text(f"""
             INSERT INTO {table} ({cols})
             SELECT {cols} FROM {tmp}
             ON CONFLICT ({conflict}) DO NOTHING
-        """))
+        """)
+        )
 
         conn.execute(text(f"DROP TABLE {tmp}"))
 

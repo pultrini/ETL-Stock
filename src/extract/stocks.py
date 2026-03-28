@@ -10,7 +10,6 @@ from constants.constants import TICKERS
 logger = logging.getLogger(__name__)
 
 
-
 def extract_ohlcv(
     tickers: list[str] = TICKERS,
     period_days: int = 90,
@@ -38,14 +37,16 @@ def extract_ohlcv(
             raw.columns = raw.columns.get_level_values(0)
             raw = raw.reset_index()
 
-            raw = raw.rename(columns={
-                "Date":   "date",
-                "Open":   "open",
-                "High":   "high",
-                "Low":    "low",
-                "Close":  "close",
-                "Volume": "volume",
-            })
+            raw = raw.rename(
+                columns={
+                    "Date": "date",
+                    "Open": "open",
+                    "High": "high",
+                    "Low": "low",
+                    "Close": "close",
+                    "Volume": "volume",
+                }
+            )
             raw["ticker"] = ticker
             raw = raw[["ticker", "date", "open", "high", "low", "close", "volume"]]
 

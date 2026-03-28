@@ -7,10 +7,18 @@ requires-python = ">=3.14"
 dependencies = [
     "alembic>=1.18.4",
     "apache-airflow>=3.1.8",
+    "databricks-cli>=0.18.0",
+    "hmmlearn>=0.3.3",
+    "matplotlib>=3.10.8",
     "pandas>=3.0.1",
     "psycopg2-binary>=2.9.11",
+    "pyarrow>=23.0.1",
     "python-dotenv>=1.2.2",
     "requests>=2.32.5",
+    "scikit-learn>=1.8.0",
+    "scipy>=1.17.1",
+    "scipy-stubs~=1.17.1",
+    "seaborn>=0.13.2",
     "sqlalchemy>=2.0.48",
     "yfinance>=1.2.0",
 ]
