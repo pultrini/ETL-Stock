@@ -69,7 +69,7 @@ cd fintech-etl
 ### 2. Instala as dependências Python
 
 ```bash
-uv pip install -e .
+uv sync
 ```
 
 ### 3. Configura as variáveis de ambiente
