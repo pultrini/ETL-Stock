@@ -74,7 +74,6 @@ def compute_metrics_risk(returns: np.ndarray, confidence: float = 0.95) -> dict:
     var_param = -(mu + stats.norm.ppf(1 - confidence) * sigma)
     var_hist = -np.percentile(clean, (1 - confidence) * 100)
 
-    # bug fix: comparar com -var_hist (cauda negativa)
     tail = clean[clean <= -var_hist]
     cvar = -tail.mean() if len(tail) > 0 else np.nan
 
@@ -108,7 +107,6 @@ def risk_by_regime(result: dict, confidence: float = 0.95) -> pd.DataFrame:
         subset = data[data["regime"] == regime]["daily_return"].values
         metrics = compute_metrics_risk(subset, confidence)
 
-        # bug fix: pct_tempo estava faltando
         metrics["regime"] = regime
         metrics["regime_nome"] = regime_labels.get(regime, f"Regime {regime}")
         metrics["pct_tempo"] = round(len(subset) / total * 100, 1)
