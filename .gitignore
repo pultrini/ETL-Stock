@@ -13,4 +13,4 @@ password_supa
 
 alembic.ini
 logs
-data
+data/raw
