@@ -22,12 +22,10 @@ def plot_regimes(result: dict) -> None:
     ax1.plot(data["date"], data["close"], color="#333", linewidth=0.8, label="Preço")
     for regime, color in REGIME_COLORS.items():
         mask = data["regime"] == regime
-        ax1.fill_between(
-            data["date"],
-            data["close"].min(),
-            data["close"].max(),
-            where=mask,
-            alpha=0.15,
+        ax1.scatter(
+            data.loc[mask, "date"],
+            data.loc[mask, "close"],
+            s=5,
             color=color,
             label=REGIME_LABELS[regime],
         )
