@@ -2,7 +2,26 @@
 
 Pipeline de dados financeiros construído com Python, Apache Airflow e Supabase. Extrai dados de ações e criptomoedas via Yahoo Finance, orquestra com Airflow em Docker e carrega no Supabase (PostgreSQL).
 
+## Como rodar
+Para salvar o modelo na sua maquina,
+instale docker e rode
+```bash
+docker-compose up
+```
+Após isso os dados serão salvos e persistidos em data/raw
+com isso, voce poderá rodar o modelo e ter as imagens de inferência 
+dos resultados obtidos em data/processed.
+
+```bash
+uv run src/model/run // ou // python src/model/run
+```
+
+Assim, voce tera os dados sendo consultados e salvos de forma diária o modelo 
+sendo ajustado todos vez que voce rodar o mmodel. Foi adicionado a DAG do model no 
+airflow para rodar todo sábado.
+
 ---
+
 
 ## Stack
 

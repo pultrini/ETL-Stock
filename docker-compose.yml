@@ -9,14 +9,28 @@ x-airflow-common: &airflow-common
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
-    _PIP_ADDITIONAL_REQUIREMENTS: 'pandas yfinance requests python-dotenv'
     DATABASE_URL: ${DATABASE_URL}
+    _PIP_ADDITIONAL_REQUIREMENTS: >-
+      pandas
+      yfinance
+      requests
+      python-dotenv
+      sqlalchemy
+      psycopg2-binary
+      pyarrow
+      alembic
+      hmmlearn
+      scikit-learn
+      scipy
+      matplotlib
+      seaborn
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
     - ./src:/opt/airflow/src
     - ./data:/opt/airflow/data
+    - ./constants:/opt/airflow/constants
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     postgres:
